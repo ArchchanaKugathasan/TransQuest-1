@@ -8,7 +8,7 @@ RESULT_IMAGE = "result.jpg"
 GOOGLE_DRIVE = False
 DRIVE_FILE_ID = None
 MODEL_TYPE = "xlmroberta"
-MODEL_NAME = "xlm-roberta-large"
+MODEL_NAME = "facebook/xlm-roberta-xl"
 
 siamesetransquest_config = {
     'output_dir': 'temp/outputs/',
@@ -18,9 +18,10 @@ siamesetransquest_config = {
     'fp16': False,
     'fp16_opt_level': 'O1',
     'max_seq_length': 80,
-    'train_batch_size': 8,
+    'train_batch_size': 1,
     'gradient_accumulation_steps': 1,
     'eval_batch_size': 8,
+    #changed num_train_epochs from 8 to 1
     'num_train_epochs': 6,
     'weight_decay': 0,
     'learning_rate': 1e-5,

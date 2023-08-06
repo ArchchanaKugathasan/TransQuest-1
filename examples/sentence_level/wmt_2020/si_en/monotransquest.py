@@ -1,4 +1,5 @@
 import os
+os.environ['TRANSFORMERS_CACHE'] = '/vol/research/Archchana/.cache'
 import shutil
 
 import numpy as np
@@ -19,9 +20,11 @@ from transquest.algo.sentence_level.monotransquest.run_model import MonoTransQue
 if not os.path.exists(TEMP_DIRECTORY):
     os.makedirs(TEMP_DIRECTORY)
 
-TRAIN_FILE = "examples/sentence_level/wmt_2020/si_en/data/si-en/train.sien.df.short.tsv"
-DEV_FILE = "examples/sentence_level/wmt_2020/si_en/data/si-en/dev.sien.df.short.tsv"
-TEST_FILE = "examples/sentence_level/wmt_2020/si_en/data/si-en/test20.sien.df.short.tsv"
+    
+
+TRAIN_FILE = "data/si-en/train.sien.df.short.tsv"
+DEV_FILE = "data/si-en/dev.sien.df.short.tsv"
+TEST_FILE = "data/si-en/test20.sien.df.short.tsv"
 
 train = read_annotated_file(TRAIN_FILE)
 dev = read_annotated_file(DEV_FILE)
@@ -48,10 +51,15 @@ if monotransquest_config["evaluate_during_training"]:
         test_preds = np.zeros((len(test), monotransquest_config["n_fold"]))
         for i in range(monotransquest_config["n_fold"]):
 
+            if torch.cuda.is_available():
+                print("CUDA available")
+            else :
+                print("CUDA NOT available")
+
             if os.path.exists(monotransquest_config['output_dir']) and os.path.isdir(
                     monotransquest_config['output_dir']):
                 shutil.rmtree(monotransquest_config['output_dir'])
-
+                
             model = MonoTransQuestModel(MODEL_TYPE, MODEL_NAME, num_labels=1, use_cuda=torch.cuda.is_available(),
                                         args=monotransquest_config)
             train_df, eval_df = train_test_split(train, test_size=0.1, random_state=SEED * i)

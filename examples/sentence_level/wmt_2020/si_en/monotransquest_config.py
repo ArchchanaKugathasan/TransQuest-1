@@ -8,7 +8,7 @@ SUBMISSION_FILE = "predictions.txt"
 GOOGLE_DRIVE = False
 DRIVE_FILE_ID = "1F-hknKCY0spD8H1gfhE9EcxusEze2si2"
 MODEL_TYPE = "xlmroberta"
-MODEL_NAME = "xlm-roberta-large"
+MODEL_NAME = "facebook/xlm-v-base"
 
 monotransquest_config = {
     'output_dir': 'temp/outputs/',

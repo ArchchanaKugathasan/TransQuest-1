@@ -1,6 +1,6 @@
 import os
 import shutil
-
+os.environ['TRANSFORMERS_CACHE'] = '/vol/research/Archchana/.cache'
 import numpy as np
 import pandas as pd
 import torch

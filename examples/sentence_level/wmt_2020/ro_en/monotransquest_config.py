@@ -7,8 +7,8 @@ SUBMISSION_FILE = "predictions.txt"
 RESULT_IMAGE = "result.jpg"
 GOOGLE_DRIVE = False
 DRIVE_FILE_ID = None
-MODEL_TYPE = "auto"
-MODEL_NAME = "microsoft/infoxlm-large"
+MODEL_TYPE = "xlmroberta"
+MODEL_NAME = "facebook/xlm-v-base"
 
 monotransquest_config = {
     'output_dir': 'temp/outputs/',
