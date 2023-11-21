@@ -16,9 +16,6 @@ from examples.sentence_level.wmt_2023.multilingual.monotransquest_config import 
 from transquest.algo.sentence_level.monotransquest.evaluation import pearson_corr, spearman_corr
 from transquest.algo.sentence_level.monotransquest.run_model import MonoTransQuestModel
 
-if not os.path.exists(TEMP_DIRECTORY):
-    os.makedirs(TEMP_DIRECTORY)
-
 import time
 
 start_time = time.time()
@@ -26,55 +23,32 @@ start_time = time.time()
 if not os.path.exists(TEMP_DIRECTORY):
     os.makedirs(TEMP_DIRECTORY)
 
+
+
+
 languages = {
+    #/user/HS501/as04746/Archchana/TransQuest/TransQuest/examples/sentence_level/wmt_2023/multilingual/data/train.engu.df.short.tsv
+    #the test data is extracted from train data eg: last 50 rows 
+    "EN-GU": ["data/few_shot/fewshot_200/train.engu.df.short.tsv",
+              "data/few_shot/fewshot_200/dev.engu.df.short.tsv",
+              "data/few_shot/fewshot_200/test.engu.df.short.tsv"],
 
-    "EN-DE": ["data/WMT23/train.ende.df.short.tsv",
-              "data/WMT23/dev.ende.df.short.tsv",
-              "data/test20.ende.df.short.tsv"],
+    "EN-HI": ["data/few_shot/fewshot_200/train.enhi.df.short.tsv",
+              "data/few_shot/fewshot_200/dev.enhi.df.short.tsv",
+              "data/few_shot/fewshot_200/test.enhi.df.short.tsv"],
 
-    "EN-GU": ["data/WMT23/train.engu.df.short.tsv",
-              "data/WMT23/dev.engu.df.short.tsv",
-              "data/our_test_data_with_gold_labels/test.engu.df.short.tsv"],
+    "EN-TA": ["data/few_shot/fewshot_200/train.enta.df.short.tsv",
+              "data/few_shot/fewshot_200/dev.enta.df.short.tsv",
+              "data/few_shot/fewshot_200/test.enta.df.short.tsv"],
 
-    "EN-HI": ["data/WMT23/train.enhi.df.short.tsv",
-              "data/WMT23/dev.enhi.df.short.tsv",
-              "data/our_test_data_with_gold_labels/test.enhi.df.short.tsv"],
+    "EN-TE": ["data/few_shot/fewshot_200/train.ente.df.short.tsv",
+              "data/few_shot/fewshot_200/dev.ente.df.short.tsv",
+              "data/few_shot/fewshot_200/test.ente.df.short.tsv"],
 
-    "EN-MR": ["data/WMT23/train.enmr.df.short.tsv",
-              "data/WMT23/dev.enmr.df.short.tsv",
-              "data/our_test_data_with_gold_labels/test.enmr.df.short.tsv"],
+    "EN-MR": ["data/few_shot/fewshot_200/train.enmr.df.short.tsv",
+              "data/few_shot/fewshot_200/dev.enmr.df.short.tsv",
+              "data/few_shot/fewshot_200/test.enmr.df.short.tsv"]
 
-    "EN-TA": ["data/WMT23/train.enta.df.short.tsv",
-              "data/WMT23/dev.enta.df.short.tsv",
-              "data/our_test_data_with_gold_labels/test.enta.df.short.tsv"],
-
-    "EN-TE": ["data/WMT23/train.ente.df.short.tsv",
-              "data/WMT23/dev.ente.df.short.tsv",
-              "data/our_test_data_with_gold_labels/test.ente.df.short.tsv"],
-
-    # "EN-DE": ["data/WMT22_data/EN_source_side/train.ende.df.short.tsv",
-    #           "data/WMT22_data/EN_source_side/dev.ende.df.short.tsv",
-    #           "data/WMT22_data/EN_source_side/test20.ende.df.short.tsv"],
-
-    # "EN-ZH": ["data/WMT22_data/EN_source_side/train.enzh.df.short.tsv",
-    #           "data/WMT22_data/EN_source_side/dev.enzh.df.short.tsv",
-    #           "data/WMT22_data/EN_source_side/test20.enzh.df.short.tsv"],
-    # #data below are EN in target size 
-    #  "NE-EN": ["data/WMT22_data/EN_Target_side/train.neen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/dev.neen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/test20.neen.df.short.tsv"],
-
-    # "RO-EN": ["data/WMT22_data/EN_Target_side/train.roen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/dev.roen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/test20.roen.df.short.tsv"],
-
-    # "RU-EN": ["data/WMT22_data/EN_Target_side/train.ruen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/dev.ruen.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/test20.ruen.df.short.tsv"],
-
-    # "SI-EN": ["data/WMT22_data/EN_Target_side/train.sien.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/dev.sien.df.short.tsv",
-    #           "data/WMT22_data/EN_Target_side/test20.sien.df.short.tsv"],
 }
 
 train_list = []

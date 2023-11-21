@@ -1,4 +1,6 @@
 from multiprocessing import cpu_count
+# from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
 
 SEED = 777
 TEMP_DIRECTORY = "temp/data"
@@ -9,6 +11,9 @@ GOOGLE_DRIVE = False
 DRIVE_FILE_ID = None
 MODEL_TYPE = "xlmroberta"
 MODEL_NAME = "xlm-roberta-large"
+
+# model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+# tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 monotransquest_config = {
     'output_dir': 'temp/outputs/',
